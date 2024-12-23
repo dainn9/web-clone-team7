@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import CartItemDetail from "../../Components/ContentComponents/CartItemDetail/CartItemDetail";
 import { OrderRequest, ProductCart } from "../../Interface";
-import { getProductById } from "../../api";
+import { BASE_URL, getProductById } from "../../api";
 import { UserContext } from "../../Components/ContentComponents/UserContext/UserContext";
 import axios from "axios";
 
@@ -97,7 +97,7 @@ const CartPage = () => {
   useEffect(() => {
     const fetchColors = async () => {
       try {
-        const response = await axios.get("http://localhost:5254/api/colors");
+        const response = await axios.get(`${BASE_URL}/colors`);
         const fetchedColors = response.data.map((color: any) => ({
           colorId: color.colorId,
           name: color.name,
@@ -119,7 +119,7 @@ const CartPage = () => {
   useEffect(() => {
     const fetchSizes = async () => {
       try {
-        const response = await axios.get("http://localhost:5254/api/sizes");
+        const response = await axios.get(`${BASE_URL}/sizes`);
         const fetchedSizes = response.data.map((size: any) => ({
           sizeId: size.sizeId,
           sizeValue: size.sizeValue,
@@ -160,15 +160,11 @@ const CartPage = () => {
     };
 
     try {
-      const response = await axios.post(
-        "http://localhost:5254/api/Order",
-        orderData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axios.post(`${BASE_URL}/Order`, orderData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       console.log(response);
       alert("Order placed successfully!");
       localStorage.removeItem("cartItems"); // Clear the cart

@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../Components/ContentComponents/UserContext/UserContext";
+import { BASE_URL } from "../../api";
 
 type OrderDetail = {
   productName: string;
@@ -32,7 +33,7 @@ const OrderHistoryPage = () => {
     const fetchOrders = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5254/api/Order/customer/${account.customerId}`
+          `${BASE_URL}/Order/customer/${account.customerId}`
         );
         const data = await response.json();
         setOrders(data); // Set the orders based on the fetched data

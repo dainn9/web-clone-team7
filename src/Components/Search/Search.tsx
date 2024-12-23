@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import SearchIcon from "./SearchIcon.tsx";
+import { BASE_URL } from "../../api.tsx";
 
 interface Props {
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -40,7 +41,7 @@ const Search = ({ handleChange, search }: Props) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("http://localhost:5254/api/products");
+        const response = await fetch(`${BASE_URL}/products`);
         const data: Product[] = await response.json();
         setProducts(data);
       } catch (error) {

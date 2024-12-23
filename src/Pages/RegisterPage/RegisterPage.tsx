@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; // Use useNavigate instead of useHistory
 import { RegisterData } from "../../Interface"; // Adjust this import based on your typ
 import { UserContext } from "../../Components/ContentComponents/UserContext/UserContext";
+import { BASE_URL } from "../../api";
 const RegisterPage = () => {
   window.scrollTo(0, 0); // Scroll to the top of the page
   const [formData, setFormData] = useState<RegisterData>({
@@ -49,16 +50,13 @@ const RegisterPage = () => {
     console.log("Payload sent:", registerPayload); // Log payload for debugging
 
     try {
-      const response = await fetch(
-        "http://localhost:5254/api/account/customer-register",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(registerPayload),
-        }
-      );
+      const response = await fetch(`${BASE_URL}/account/customer-register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(registerPayload),
+      });
 
       if (!response.ok) {
         const errorMessage = await response.text(); // Read the error message as text
