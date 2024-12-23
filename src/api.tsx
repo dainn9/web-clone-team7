@@ -8,7 +8,7 @@ import {
   TargerCustomer,
 } from "./Interface";
 
-export const BASE_URL = "http://localhost:5254/api";
+export const BASE_URL = "https://webt7api-v1-0-0.onrender.com/api";
 
 export const ProductList = async (
   subcategoryId: number,
